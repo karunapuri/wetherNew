@@ -22,6 +22,10 @@ from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 
+from flask import Flask, render_template
+import sys
+import logging
+
 import json
 import os
 
@@ -31,6 +35,8 @@ from flask import make_response
 
 # Flask app should start in global layout
 app = Flask(__name__)
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 
 @app.route('/webhook', methods=['POST'])
